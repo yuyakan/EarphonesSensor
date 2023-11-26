@@ -29,7 +29,6 @@ struct SettingView: View {
 
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    setting.checkedSensor = [Bool](repeating: false,count: sensorKind.count)
                     setting.checkedSensor[index].toggle()
                 }
             }

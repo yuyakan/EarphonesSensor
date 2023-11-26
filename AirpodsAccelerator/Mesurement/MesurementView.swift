@@ -16,9 +16,9 @@ struct MeasurementView: View {
     
     @Environment(\.horizontalSizeClass) var hSizeClass
     @Environment(\.verticalSizeClass) var vSizeClass
-
     
     var body: some View {
+        let deviceTraitStatus = DeviceTraitStatus(hSizeClass: self.hSizeClass, vSizeClass: self.vSizeClass)
         NavigationView{
             VStack{
                 Text(measuremetViewController.status)
@@ -39,18 +39,17 @@ struct MeasurementView: View {
                 Chart(data: measuremetViewController.graphValues)
                     .padding(.top, 30.0)
                     .frame(width: 337, height: 121, alignment: .bottom)
-                            .chartStyle(
-                                LineChartStyle(.quadCurve, lineColor: .blue, lineWidth: 3)
-                            )
+                    .chartStyle(
+                        LineChartStyle(.quadCurve, lineColor: .blue, lineWidth: 3)
+                    )
                 Spacer()
                 VStack{
-                    let deviceTraitStatus = DeviceTraitStatus(hSizeClass: self.hSizeClass, vSizeClass: self.vSizeClass)
-                                switch deviceTraitStatus {
-                                case .wRhR, .wChR:
-                                    self.buttonsOnPortrait
-                                case .wRhC, .wChC:
-                                    self.buttonsOnLandscape
-                                }
+                    switch deviceTraitStatus {
+                    case .wRhR, .wChR:
+                        self.buttonsOnPortrait
+                    case .wRhC, .wChC:
+                        self.buttonsOnLandscape
+                    }
                 }
                 BannerView()
                     .frame(width: 320, height: 50)
