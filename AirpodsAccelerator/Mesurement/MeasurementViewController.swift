@@ -15,9 +15,10 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     @Published var fileName = ""
     @Published var timeCounter = "0.00"
     @Published var saveCompleteShowingAlert = false
-    @Published var notNameShowingAlert = false
+    @Published var checkAirpodsShowingAlert = false
+    @Published var saveNameAlert = false
     @Published var isStartingMeasure = false
-    @Published var status = "Waiting for measurement"
+    @Published var status = String(localized: "Waiting for measurement")
     @Published var stopSave = false
     @ObservedObject var setting = SettingInfo.shared
     var graphValues: [Double] = []
@@ -44,23 +45,14 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     
     //start
     func startCalc(){
-        guard isValidFileName() else { return }
+        isStartingMeasure = true
         resetMeasureStatus()
         startGettingData()
     }
     
-    private func isValidFileName() -> Bool {
-        if fileName == "" {
-            notNameShowingAlert = true
-            return false
-        }
-        isStartingMeasure = true
-        return true
-    }
-    
     private func resetMeasureStatus() {
         saveCompleteShowingAlert = false
-        notNameShowingAlert = false
+        checkAirpodsShowingAlert = false
         graphValues = []
         nowTime = 0.0
         elapsedTime.removeAll()
@@ -71,7 +63,7 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     }
     
     private func startGettingData() {
-        status = "During measurement"
+        status = String(localized: "During measurement")
         airpods.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: {[weak self] motion, error  in
             guard let motion = motion else { return }
             self?.registData(motion)
@@ -134,21 +126,36 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     func stopCalc(){
         //計測の停止
         airpods.stopDeviceMotionUpdates()
+        isStartingMeasure = false
         if nowTime == 0.0 {
+            checkAirpodsShowingAlert = true
             return
         }
+        stopSave = true
         saveCompleteShowingAlert = false
     }
     
     
     //save
+    let formatter = DateFormatter()
+    func save() {
+        let now = Date()
+        formatter.dateFormat = "y-MM-dd_HH-mm-ss"
+        formatter.locale = .current
+        fileName = formatter.string(from: now)
+        saveNameAlert = true
+    }
+    
     func saveFile(){
+        saveNameAlert = false
+        isStartingMeasure = false
+        stopSave = false
         do {
             let csv = self.createCsv()
             let path = NSHomeDirectory() + "/Documents/" + fileName + ".csv"
             try csv.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
             
-            status = "End of measurement"
+            status = String(localized: "End of measurement")
             saveCompleteShowingAlert = true
             fileName = ""
         }
@@ -163,7 +170,7 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
         var dataRows: [String] = zip2Array(array1: rawTime, array2: elapsedTime)
         
         if self.setting.checkedSensor[0] {
-            Title = Title + ", Accel_x, Accel_y, Accel_z"
+            Title = Title + ", Acceleration_x, Acceleration_y, Acceleration_z"
             dataRows = zip2Array(array1: dataRows, array2: zipSensorData(sensorData: accel))
         }
         if self.setting.checkedSensor[1] {
@@ -193,5 +200,3 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
             .map { nums in "\(nums.0), \(nums.1)" }
     }
 }
-
-

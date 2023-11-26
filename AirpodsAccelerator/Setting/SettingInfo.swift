@@ -13,9 +13,9 @@ public class SettingInfo : ObservableObject{
     private init(){}
     @Published var checkedSensor: [Bool] = [
         true,
-        false,
-        false,
-        false
+        true,
+        true,
+        true
     ]
 }
 

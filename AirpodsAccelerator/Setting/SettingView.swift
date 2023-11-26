@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-
 struct SettingView: View {
     @ObservedObject var setting = SettingInfo.shared
     
     let sensorKind: [String] = [
-        "userAcceleration",
-        "gravity",
-        "rotationRate",
-        "attitude"
+        String(localized: "acceleration"),
+        String(localized: "gravity"),
+        String(localized: "rotationRate"),
+        String(localized: "attitude")
     ]
 
     var body: some View {

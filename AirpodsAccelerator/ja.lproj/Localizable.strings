@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  Earphones Acceleration Sensor
+
+  Created by 上別縄祐也 on 2023/11/26.
+  
+*/
+"Waiting for measurement" = "計測待ち";
+"During measurement" = "計測中";
+"End of measurement" = "計測終了";
+"Failed to save" = "保存に失敗しました";
+
+"acceleration" = "acceleration";
+"gravity" = "gravity";
+"rotationRate" = "rotationRate";
+"attitude" = "attitude";
+
+"Setting" = "設定";
+"File name to save" = "ファイル名";
+"start" = "start";
+"save" = "保存";
+"stop" = "stop";
+"sameNameText" = "ファイル名が入力されていません";
+"sameNameMessage" = "ファイル名を入力してください";
+"Save completed" = "保存が完了しました";
+"saveFile" = "「ファイル」->「このiPhone内」->「EarphonesAccelerationSensor」に保存しました";
+
+"Cancel" = "キャンセル";
+"Save" = "保存";
+
+"checkAirpods" = "イヤホンの接続を確認してください";
