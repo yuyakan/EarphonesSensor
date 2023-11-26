@@ -8,17 +8,23 @@
 import SwiftUI
 import Charts
 import GoogleMobileAds
+import StoreKit
 
 struct MeasurementView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @ObservedObject var measuremetViewController = MeasurementViewController()
-    @State var showIntersitialAd: Bool = false
-    
+    @ObservedObject var interstitial = Interstitial()
     @Environment(\.horizontalSizeClass) var hSizeClass
     @Environment(\.verticalSizeClass) var vSizeClass
-
+    
+    private func requestReview() {
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            SKStoreReviewController.requestReview(in: scene)
+        }
+    }
     
     var body: some View {
+        let deviceTraitStatus = DeviceTraitStatus(hSizeClass: self.hSizeClass, vSizeClass: self.vSizeClass)
         NavigationView{
             VStack{
                 Text(measuremetViewController.status)
@@ -39,18 +45,17 @@ struct MeasurementView: View {
                 Chart(data: measuremetViewController.graphValues)
                     .padding(.top, 30.0)
                     .frame(width: 337, height: 121, alignment: .bottom)
-                            .chartStyle(
-                                LineChartStyle(.quadCurve, lineColor: .blue, lineWidth: 3)
-                            )
+                    .chartStyle(
+                        LineChartStyle(.quadCurve, lineColor: .purple, lineWidth: 3)
+                    )
                 Spacer()
                 VStack{
-                    let deviceTraitStatus = DeviceTraitStatus(hSizeClass: self.hSizeClass, vSizeClass: self.vSizeClass)
-                                switch deviceTraitStatus {
-                                case .wRhR, .wChR:
-                                    self.buttonsOnPortrait
-                                case .wRhC, .wChC:
-                                    self.buttonsOnLandscape
-                                }
+                    switch deviceTraitStatus {
+                    case .wRhR, .wChR:
+                        self.buttonsOnPortrait
+                    case .wRhC, .wChC:
+                        self.buttonsOnLandscape
+                    }
                 }
                 BannerView()
                     .frame(width: 320, height: 50)
@@ -58,8 +63,12 @@ struct MeasurementView: View {
             }
             .navigationBarItems(trailing:
                 NavigationLink(destination: SettingView()){
-                Text("Setting")
+                Image(systemName: "slider.horizontal.3")
+                    .font(.system(size: 26))
             })
+        }
+        .onAppear() {
+            interstitial.loadInterstitial()
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -69,38 +78,27 @@ private extension MeasurementView {
     var buttonsOnPortrait: some View {
         VStack{
             HStack{
-                TextField("File name to save", text: $measuremetViewController.fileName, onCommit: {
-                    measuremetViewController.status = "Waiting for measurement"
-                })
-                    .frame(width: 200.0)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                Text(".csv")
-                    .frame(width: 35.0, height: 35.0)
-            }
-            
-            HStack{
+                Spacer()
                 Button(action: {
                     measuremetViewController.stopSave = false
                     measuremetViewController.startCalc()
                 }) {
-                    Text("start")
+                    Image(systemName: "play.fill")
                         .padding(.horizontal)
                         .font(.title)
-                        .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+                        .foregroundColor(Color.white)
                         .frame(width: 160.0, height: 120.0)
                         .background(Color("startColor"))
                         .clipShape(Circle())
-                }.alert(isPresented: $measuremetViewController.notNameShowingAlert) {
-                    Alert(title: Text("The file name to save has not been entered"), message: Text("Please enter the file name to save"))
                 }
+                .disabled(measuremetViewController.isStartingMeasure)
+                .opacity(measuremetViewController.isStartingMeasure ? 0.3 : 1)
+                Spacer()
                 if(measuremetViewController.stopSave){
                     Button(action: {
-                        measuremetViewController.saveFile()
-                        measuremetViewController.isStartingMeasure = false
-                        measuremetViewController.stopSave = false
+                        measuremetViewController.save()
                     }) {
-                        Text("save")
+                        Image(systemName: "arrow.down.to.line")
                             .padding(.horizontal)
                             .font(.title)
                             .foregroundColor(Color.white)
@@ -108,30 +106,44 @@ private extension MeasurementView {
                             .background(Color("saveColor"))
                             .clipShape(Circle())
                     }
+                    .alert(String(localized: "sameNameMessage"), isPresented: $measuremetViewController.saveNameAlert) {
+                        TextField(String(localized: "File name to save"), text: $measuremetViewController.fileName)
+                        Button(String(localized: "Save")) {
+                            measuremetViewController.saveFile()
+                        }
+                        Button(String(localized: "Cancel")) {
+                            requestReview()
+                        }
+                    }
                 }else{
                     Button(action: {
                         measuremetViewController.stopCalc()
-                        measuremetViewController.stopSave = true
                     }) {
-                        Text("stop")
+                        Image(systemName: "stop.fill")
                             .padding(.horizontal)
                             .font(.title)
-                            .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+                            .foregroundColor(Color.white)
                             .frame(width: 160.0, height: 120.0)
-                            .background(Color("startColor"))
+                            .background(Color("stopColor"))
                             .clipShape(Circle())
-                    }.disabled(!measuremetViewController.isStartingMeasure)
-                    .alert("Save completed", isPresented: $measuremetViewController.saveCompleteShowingAlert) {
+                            .alert(String(localized: "checkAirpods"), isPresented: $measuremetViewController.checkAirpodsShowingAlert) {
+                                Text("OK")
+                            }
+                    }
+                    .disabled(!measuremetViewController.isStartingMeasure)
+                    .opacity(measuremetViewController.isStartingMeasure ? 1 : 0.3)
+                    .alert(String(localized: "Save completed"), isPresented: $measuremetViewController.saveCompleteShowingAlert) {
                         Button("OK") {
-                            showIntersitialAd.toggle()
                             Thread.sleep(forTimeInterval: 0.5)
                             measuremetViewController.timeCounter = "0.00"
                             measuremetViewController.graphValues = []
+                            interstitial.presentInterstitial()
                         }
                     } message: {
-                        Text("Saved in　Files->On My iPhone->AirpodsAccelerator")
+                        Text(LocalizedStringKey("saveFile"))
                     }
                 }
+                Spacer()
             }.padding()
         }
     }
@@ -142,33 +154,20 @@ private extension MeasurementView {
                 measuremetViewController.stopSave = false
                 measuremetViewController.startCalc()
             }) {
-                Text("start")
+                Image(systemName: "start.fill")
                     .padding()
                     .font(.title)
                     .foregroundColor(Color.white)
                     .frame(width: 160.0, height: 120.0)
                     .background(Color("startColor"))
                     .clipShape(Circle())
-            }.alert(isPresented: $measuremetViewController.notNameShowingAlert) {
-                Alert(title: Text("The file name to save has not been entered"), message: Text("Please enter the file name to save"))
             }
-            TextField("File name to save", text: $measuremetViewController.fileName, onCommit: {
-                measuremetViewController.status = "Waiting for measurement"
-            })
-                .frame(width: 200.0)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            Text(".csv")
-                .frame(width: 35.0, height: 35.0)
-            
             
             if(measuremetViewController.stopSave){
                 Button(action: {
-                    measuremetViewController.saveFile()
-                    measuremetViewController.isStartingMeasure = false
-                    measuremetViewController.stopSave = false
+                    measuremetViewController.save()
                 }) {
-                    Text("save")
+                    Image(systemName: "arrow.down.to.line")
                         .padding(.horizontal)
                         .font(.title)
                         .foregroundColor(Color.white)
@@ -176,29 +175,39 @@ private extension MeasurementView {
                         .background(Color("saveColor"))
                         .clipShape(Circle())
                 }
+                .alert(String(localized: "sameNameMessage"), isPresented: $measuremetViewController.saveNameAlert) {
+                    TextField(String(localized: "File name to save"), text: $measuremetViewController.fileName)
+                    Button(String(localized: "Save")) {
+                        measuremetViewController.saveFile()
+                    }
+                    Button(String(localized: "Cancel")) {
+                    }
+                }
             }else{
                 Button(action: {
                     measuremetViewController.stopCalc()
                     measuremetViewController.stopSave = true
                     
                 }) {
-                    Text("stop")
+                    Image(systemName: "stop.fill")
                         .padding(.horizontal)
                         .font(.title)
                         .foregroundColor(Color.white)
                         .frame(width: 160.0, height: 120.0)
-                        .background(Color("startColor"))
+                        .background(Color("stopColor"))
                         .clipShape(Circle())
-                }.disabled(!measuremetViewController.isStartingMeasure)
-                .alert("Save completed", isPresented: $measuremetViewController.saveCompleteShowingAlert) {
+                }
+                .disabled(!measuremetViewController.isStartingMeasure)
+                .opacity(measuremetViewController.isStartingMeasure ? 1 : 0.3)
+                .alert(String(localized: "Save completed"), isPresented: $measuremetViewController.saveCompleteShowingAlert) {
                     Button("OK") {
-                        showIntersitialAd.toggle()
                         Thread.sleep(forTimeInterval: 0.5)
                         measuremetViewController.timeCounter = "0.00"
                         measuremetViewController.graphValues = []
+                        interstitial.presentInterstitial()
                     }
                 } message: {
-                    Text("Saved in　Files->On My iPhone->AirpodsAccelerator")
+                    Text(LocalizedStringKey("saveFile"))
                 }
             }
         }
