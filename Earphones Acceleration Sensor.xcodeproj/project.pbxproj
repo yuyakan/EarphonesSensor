@@ -16,6 +16,7 @@
 		067CB253274120C500899DD3 /* SettingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067CB252274120C500899DD3 /* SettingInfo.swift */; };
 		06B812CE27410EEB00FD2F79 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B812CD27410EEA00FD2F79 /* MeasurementViewController.swift */; };
 		06B812D027410F0400FD2F79 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B812CF27410F0400FD2F79 /* SettingView.swift */; };
+		4B0B5FE92B16427100FCE439 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B5FE82B16427100FCE439 /* AlertViewController.swift */; };
 		4B9C62AB2B1217E0006D15D1 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62AA2B1217E0006D15D1 /* InterstitialAd.swift */; };
 		4B9C62AE2B12181D006D15D1 /* bannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62AD2B12181D006D15D1 /* bannerAd.swift */; };
 		4B9C62B32B124239006D15D1 /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62B22B124239006D15D1 /* SensorData.swift */; };
@@ -36,6 +37,7 @@
 		06B812CD27410EEA00FD2F79 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		06B812CF27410F0400FD2F79 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3B89C654F8E04A85B864C5C7 /* Pods-Earphones Acceleration Sensor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Earphones Acceleration Sensor.release.xcconfig"; path = "Target Support Files/Pods-Earphones Acceleration Sensor/Pods-Earphones Acceleration Sensor.release.xcconfig"; sourceTree = "<group>"; };
+		4B0B5FE82B16427100FCE439 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		4B9C62AA2B1217E0006D15D1 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
 		4B9C62AD2B12181D006D15D1 /* bannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bannerAd.swift; sourceTree = "<group>"; };
 		4B9C62B22B124239006D15D1 /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				067CB2562741541B00899DD3 /* Info.plist */,
 				0626677C273C22D50072201A /* AirpodsAcceleratorApp.swift */,
 				06602B5F27441E99009FFACD /* DeviceTraitStatus.swift */,
+				4B0B5FE82B16427100FCE439 /* AlertViewController.swift */,
 				4B9C62B12B124224006D15D1 /* Data */,
 				4B9C62AF2B1218E7006D15D1 /* Mesurement */,
 				4B9C62B02B121903006D15D1 /* Setting */,
@@ -291,6 +294,7 @@
 				4B9C62AB2B1217E0006D15D1 /* InterstitialAd.swift in Sources */,
 				06602B6027441E9A009FFACD /* DeviceTraitStatus.swift in Sources */,
 				067CB253274120C500899DD3 /* SettingInfo.swift in Sources */,
+				4B0B5FE92B16427100FCE439 /* AlertViewController.swift in Sources */,
 				06B812CE27410EEB00FD2F79 /* MeasurementViewController.swift in Sources */,
 				4B9C62AE2B12181D006D15D1 /* bannerAd.swift in Sources */,
 				06B812D027410F0400FD2F79 /* SettingView.swift in Sources */,
@@ -468,7 +472,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanbe.AirpodsAccelerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -505,7 +509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanbe.AirpodsAccelerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
