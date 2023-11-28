@@ -132,16 +132,7 @@ private extension MeasurementView {
                     }
                     .disabled(!measuremetViewController.isStartingMeasure)
                     .opacity(measuremetViewController.isStartingMeasure ? 1 : 0.3)
-                    .alert(String(localized: "Save completed"), isPresented: $measuremetViewController.saveCompleteShowingAlert) {
-                        Button("OK") {
-                            Thread.sleep(forTimeInterval: 0.5)
-                            measuremetViewController.timeCounter = "0.00"
-                            measuremetViewController.graphValues = []
-                            interstitial.presentInterstitial()
-                        }
-                    } message: {
-                        Text(LocalizedStringKey("saveFile"))
-                    }
+                    .alertWithImage(isPresented: $measuremetViewController.saveCompleteShowingAlert, title: String(localized: "Save completed"), message: String(localized: "saveFile"), interstitial: interstitial, measurementViewController: measuremetViewController)
                 }
                 Spacer()
             }.padding()

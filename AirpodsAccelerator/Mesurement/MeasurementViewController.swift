@@ -45,8 +45,8 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     
     //start
     func startCalc(){
-        isStartingMeasure = true
         resetMeasureStatus()
+        isStartingMeasure = true
         startGettingData()
     }
     
@@ -129,8 +129,10 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
         isStartingMeasure = false
         if nowTime == 0.0 {
             checkAirpodsShowingAlert = true
+            status = String(localized: "Waiting for measurement")
             return
         }
+        status = String(localized: "End of measurement")
         stopSave = true
         saveCompleteShowingAlert = false
     }
@@ -155,7 +157,7 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
             let path = NSHomeDirectory() + "/Documents/" + fileName + ".csv"
             try csv.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
             
-            status = String(localized: "End of measurement")
+            status = String(localized: "Waiting for measurement")
             saveCompleteShowingAlert = true
             fileName = ""
         }
