@@ -16,8 +16,11 @@
 		067CB253274120C500899DD3 /* SettingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067CB252274120C500899DD3 /* SettingInfo.swift */; };
 		06B812CE27410EEB00FD2F79 /* MeasurementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B812CD27410EEA00FD2F79 /* MeasurementViewController.swift */; };
 		06B812D027410F0400FD2F79 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B812CF27410F0400FD2F79 /* SettingView.swift */; };
+		4B0B5FE92B16427100FCE439 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0B5FE82B16427100FCE439 /* AlertViewController.swift */; };
 		4B9C62AB2B1217E0006D15D1 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62AA2B1217E0006D15D1 /* InterstitialAd.swift */; };
 		4B9C62AE2B12181D006D15D1 /* bannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62AD2B12181D006D15D1 /* bannerAd.swift */; };
+		4B9C62B32B124239006D15D1 /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62B22B124239006D15D1 /* SensorData.swift */; };
+		4B9C62B62B13047C006D15D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B9C62B82B13047C006D15D1 /* Localizable.strings */; };
 		723ED1531609867AB8BC4298 /* Pods_Earphones_Acceleration_Sensor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AD56D22F49B07CC71879FB /* Pods_Earphones_Acceleration_Sensor.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,8 +37,19 @@
 		06B812CD27410EEA00FD2F79 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		06B812CF27410F0400FD2F79 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3B89C654F8E04A85B864C5C7 /* Pods-Earphones Acceleration Sensor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Earphones Acceleration Sensor.release.xcconfig"; path = "Target Support Files/Pods-Earphones Acceleration Sensor/Pods-Earphones Acceleration Sensor.release.xcconfig"; sourceTree = "<group>"; };
+		4B0B5FE82B16427100FCE439 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		4B9C62AA2B1217E0006D15D1 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
 		4B9C62AD2B12181D006D15D1 /* bannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bannerAd.swift; sourceTree = "<group>"; };
+		4B9C62B22B124239006D15D1 /* SensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
+		4B9C62B72B13047C006D15D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B9C62B92B13047D006D15D1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4B9C62BA2B13047E006D15D1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B9C62BB2B130484006D15D1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B9C62BC2B130485006D15D1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B9C62BD2B130486006D15D1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B9C62BE2B130486006D15D1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B9C62BF2B130487006D15D1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B9C62C02B137E5E006D15D1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D0AD56D22F49B07CC71879FB /* Pods_Earphones_Acceleration_Sensor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Earphones_Acceleration_Sensor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,9 +90,12 @@
 				067CB2562741541B00899DD3 /* Info.plist */,
 				0626677C273C22D50072201A /* AirpodsAcceleratorApp.swift */,
 				06602B5F27441E99009FFACD /* DeviceTraitStatus.swift */,
+				4B0B5FE82B16427100FCE439 /* AlertViewController.swift */,
+				4B9C62B12B124224006D15D1 /* Data */,
 				4B9C62AF2B1218E7006D15D1 /* Mesurement */,
 				4B9C62B02B121903006D15D1 /* Setting */,
 				4B93F90E28315BB90076288F /* Ad */,
+				4B9C62B82B13047C006D15D1 /* Localizable.strings */,
 				06266780273C22DB0072201A /* Assets.xcassets */,
 				06266782273C22DB0072201A /* Preview Content */,
 			);
@@ -126,6 +143,14 @@
 				067CB252274120C500899DD3 /* SettingInfo.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		4B9C62B12B124224006D15D1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4B9C62B22B124239006D15D1 /* SensorData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		82871A67CDAF11096725DCF3 /* Pods */ = {
@@ -184,6 +209,14 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				fr,
+				de,
+				ru,
+				es,
+				ja,
+				ko,
+				"pt-BR",
 			);
 			mainGroup = 06266770273C22D50072201A;
 			packageReferences = (
@@ -204,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06266784273C22DB0072201A /* Preview Assets.xcassets in Resources */,
+				4B9C62B62B13047C006D15D1 /* Localizable.strings in Resources */,
 				06266781273C22DB0072201A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,15 +294,36 @@
 				4B9C62AB2B1217E0006D15D1 /* InterstitialAd.swift in Sources */,
 				06602B6027441E9A009FFACD /* DeviceTraitStatus.swift in Sources */,
 				067CB253274120C500899DD3 /* SettingInfo.swift in Sources */,
+				4B0B5FE92B16427100FCE439 /* AlertViewController.swift in Sources */,
 				06B812CE27410EEB00FD2F79 /* MeasurementViewController.swift in Sources */,
 				4B9C62AE2B12181D006D15D1 /* bannerAd.swift in Sources */,
 				06B812D027410F0400FD2F79 /* SettingView.swift in Sources */,
 				0626677F273C22D50072201A /* MesurementView.swift in Sources */,
 				0626677D273C22D50072201A /* AirpodsAcceleratorApp.swift in Sources */,
+				4B9C62B32B124239006D15D1 /* SensorData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4B9C62B82B13047C006D15D1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B9C62B72B13047C006D15D1 /* en */,
+				4B9C62B92B13047D006D15D1 /* zh-Hans */,
+				4B9C62BA2B13047E006D15D1 /* fr */,
+				4B9C62BB2B130484006D15D1 /* de */,
+				4B9C62BC2B130485006D15D1 /* ja */,
+				4B9C62BD2B130486006D15D1 /* ko */,
+				4B9C62BE2B130486006D15D1 /* ru */,
+				4B9C62BF2B130487006D15D1 /* es */,
+				4B9C62C02B137E5E006D15D1 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		06266785273C22DB0072201A /* Debug */ = {
@@ -410,14 +465,14 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanbe.AirpodsAccelerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -447,14 +502,14 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanbe.AirpodsAccelerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

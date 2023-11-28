@@ -15,22 +15,23 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     @Published var fileName = ""
     @Published var timeCounter = "0.00"
     @Published var saveCompleteShowingAlert = false
-    @Published var notNameShowingAlert = false
+    @Published var checkAirpodsShowingAlert = false
+    @Published var saveNameAlert = false
     @Published var isStartingMeasure = false
-    @Published var status = "Waiting for measurement"
+    @Published var status = String(localized: "Waiting for measurement")
     @Published var stopSave = false
     @ObservedObject var setting = SettingInfo.shared
-    
-    let airpods = CMHeadphoneMotionManager()
-    
     var graphValues: [Double] = []
-    var time : [Double] = []
+
+    let airpods = CMHeadphoneMotionManager()
+    var rawTime: [Double] = []
+    var elapsedTime : [Double] = []
     var nowTime: Double = 0.0
     
-    var X : [Double] = []
-    var Y : [Double] = []
-    var Z : [Double] = []
-    var Total: [Double] = []
+    var accel = SensorData()
+    var rotate = SensorData()
+    var gravity = SensorData()
+    var attitude = SensorData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,33 +45,25 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     
     //start
     func startCalc(){
-        guard isValidFileName() else { return }
         resetMeasureStatus()
-        startGettingData()
-    }
-    
-    private func isValidFileName() -> Bool {
-        if fileName == "" {
-            notNameShowingAlert = true
-            return false
-        }
         isStartingMeasure = true
-        return true
+        startGettingData()
     }
     
     private func resetMeasureStatus() {
         saveCompleteShowingAlert = false
-        notNameShowingAlert = false
+        checkAirpodsShowingAlert = false
         graphValues = []
         nowTime = 0.0
-        time.removeAll()
-        X.removeAll()
-        Y.removeAll()
-        Z.removeAll()
+        elapsedTime.removeAll()
+        accel = SensorData()
+        rotate = SensorData()
+        attitude = SensorData()
+        gravity = SensorData()
     }
     
     private func startGettingData() {
-        status = "During measurement"
+        status = String(localized: "During measurement")
         airpods.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: {[weak self] motion, error  in
             guard let motion = motion else { return }
             self?.registData(motion)
@@ -78,39 +71,52 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     }
     
     private func registData(_ data: CMDeviceMotion){
-        let x, y, z : Double
-        //選択されたセンサのデータをX,Y,Zに記録
+        updateSensorData(data: data)
+        updateGraphValue(data: data)
+        updateTime(t: data.timestamp)
+    }
+    
+    private func updateSensorData(data: CMDeviceMotion) {
         if self.setting.checkedSensor[0] {
-            x = data.userAcceleration.x
-            y = data.userAcceleration.y
-            z = data.userAcceleration.z
-            graphValues.append(abs(x) + abs(y) + abs(z))
-        }else if self.setting.checkedSensor[1] {
-            x = data.gravity.x
-            y = data.gravity.y
-            z = data.gravity.z
-            graphValues.append(z*z)
-        }else if self.setting.checkedSensor[2] {
-            x = data.rotationRate.x
-            y = data.rotationRate.y
-            z = data.rotationRate.z
-            graphValues.append((abs(x) + abs(y) + abs(z)) * 0.3)
-        }else {
-            x = data.attitude.pitch
-            y = data.attitude.roll
-            z = data.attitude.yaw
-            graphValues.append(y + 0.3)
+            accel.x.append(data.userAcceleration.x)
+            accel.y.append(data.userAcceleration.y)
+            accel.z.append(data.userAcceleration.z)
         }
-        X.append(x)
-        Y.append(y)
-        Z.append(z)
-        
-        //計測開始からの時間をtimeに記録
-        let t = data.timestamp
+        if self.setting.checkedSensor[1] {
+            gravity.x.append(data.gravity.x)
+            gravity.y.append(data.gravity.y)
+            gravity.z.append(data.gravity.z)
+        }
+        if self.setting.checkedSensor[2] {
+            rotate.x.append(data.rotationRate.x)
+            rotate.y.append(data.rotationRate.y)
+            rotate.z.append(data.rotationRate.z)
+        }
+        if self.setting.checkedSensor[3] {
+            attitude.x.append(data.attitude.pitch)
+            attitude.y.append(data.attitude.roll)
+            attitude.z.append(data.attitude.yaw)
+        }
+    }
+    
+    private func updateGraphValue(data: CMDeviceMotion) {
+        if self.setting.checkedSensor[0] {
+            graphValues.append(abs(data.userAcceleration.x) + abs(data.userAcceleration.y) + abs(data.userAcceleration.z))
+        } else if self.setting.checkedSensor[2] {
+            graphValues.append((abs(data.rotationRate.x) + abs(data.rotationRate.y) + abs(data.rotationRate.z)) * 0.3)
+        } else if self.setting.checkedSensor[1] {
+            graphValues.append(data.gravity.z*data.gravity.z)
+        } else {
+            graphValues.append(data.attitude.roll + 0.3)
+        }
+    }
+    
+    private func updateTime(t: Double) {
         if (nowTime == 0.0){
             nowTime = t
         }
-        time.append(t - nowTime)
+        rawTime.append(t)
+        elapsedTime.append(t - nowTime)
         //画面の計測時間を更新
         timeCounter = String(format: "%0.2f",t - nowTime)
     }
@@ -120,23 +126,38 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
     func stopCalc(){
         //計測の停止
         airpods.stopDeviceMotionUpdates()
+        isStartingMeasure = false
         if nowTime == 0.0 {
+            checkAirpodsShowingAlert = true
+            status = String(localized: "Waiting for measurement")
             return
         }
+        status = String(localized: "End of measurement")
+        stopSave = true
         saveCompleteShowingAlert = false
     }
     
     
     //save
+    let formatter = DateFormatter()
+    func save() {
+        let now = Date()
+        formatter.dateFormat = "y-MM-dd_HH-mm-ss"
+        formatter.locale = .current
+        fileName = formatter.string(from: now)
+        saveNameAlert = true
+    }
+    
     func saveFile(){
+        saveNameAlert = false
+        isStartingMeasure = false
+        stopSave = false
         do {
-            // csvファイルに計測データを書き込む
-            var csv = ""
-            csv = self.createCsv(X: X, Y: Y, Z: Z)
+            let csv = self.createCsv()
             let path = NSHomeDirectory() + "/Documents/" + fileName + ".csv"
             try csv.write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
             
-            status = "End of measurement"
+            status = String(localized: "Waiting for measurement")
             saveCompleteShowingAlert = true
             fileName = ""
         }
@@ -146,40 +167,38 @@ class MeasurementViewController: UIViewController, CMHeadphoneMotionManagerDeleg
         }
     }
     
-    private func createCsv(X: [Double], Y: [Double], Z: [Double]) -> String {
-        //計測データを一つにまとめる
-        var csv: String
+    private func createCsv() -> String {
+        var Title: String = "time, elapsedTime"
+        var dataRows: [String] = zip2Array(array1: rawTime, array2: elapsedTime)
         
-        //Attitude以外の時はTotalを追加
-        var Title: String
-        if setting.checkedSensor[3] {
-            csv = zip(zip(zip(time, X)
-                            .map { nums in "\(nums.0), \(nums.1)" }
-                          , Y)
-                        .map { nums in "\(nums.0), \(nums.1)" }
-                      , Z)
-                    .map { nums in "\(nums.0), \(nums.1)" }
-                    .joined(separator: "\n")
-            Title = "time, pitch, roll, yaw\n"
-        } else {
-            Title = "time, x, y, z, T\n"
-            Total = X.map{$0 * $0} + Y.map{$0 * $0} + Z.map{$0 * $0}
-            Total = Total.map{sqrt($0)}
-            
-            csv = zip(zip(zip(zip(time, X)
-                                .map { nums in "\(nums.0), \(nums.1)" }
-                              , Y)
-                            .map { nums in "\(nums.0), \(nums.1)" }
-                          , Z)
-                        .map { nums in "\(nums.0), \(nums.1)" }
-                        , Total)
-            .map{ nums in "\(nums.0), \(nums.1)"}
-            .joined(separator: "\n")
+        if self.setting.checkedSensor[0] {
+            Title = Title + ", Acceleration_x, Acceleration_y, Acceleration_z"
+            dataRows = zip2Array(array1: dataRows, array2: zipSensorData(sensorData: accel))
+        }
+        if self.setting.checkedSensor[1] {
+            Title = Title + ", Gravity_x, Gravity_y, Gravity_z"
+            dataRows = zip2Array(array1: dataRows, array2: zipSensorData(sensorData: gravity))
+        }
+        if self.setting.checkedSensor[2] {
+            Title = Title + ", Rotation_x, Rotation_y, Rotation_z"
+            dataRows = zip2Array(array1: dataRows, array2: zipSensorData(sensorData: rotate))
+        }
+        if self.setting.checkedSensor[3] {
+            Title = Title + ", pitch, roll, yaw"
+            dataRows = zip2Array(array1: dataRows, array2: zipSensorData(sensorData: attitude))
         }
         
-        csv = Title + csv
-        return csv
+        return Title + "\n" + dataRows.joined(separator: "\n")
+    }
+    
+    private func zipSensorData(sensorData: SensorData) -> [String] {
+        let zip2Data = zip2Array(array1: sensorData.x, array2: sensorData.y)
+        let zip3Data = zip2Array(array1: zip2Data, array2: sensorData.z)
+        return zip3Data
+    }
+    
+    private func zip2Array(array1: Array<Any>, array2: Array<Any>) -> [String] {
+        zip(array1, array2)
+            .map { nums in "\(nums.0), \(nums.1)" }
     }
 }
-
-
