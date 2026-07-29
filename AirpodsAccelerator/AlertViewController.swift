@@ -5,11 +5,13 @@
 //  Created by 上別縄祐也 on 2023/11/29.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
+import StoreKit
 
-struct AlertControllerWithTextFieldContainer: UIViewControllerRepresentable {
-
+// 画像付きの保存完了ダイアログ。UIAlertController は画像を差し込むと
+// 端末サイズやフォントで崩れるため、SwiftUI で素直に縦積みして表示する。
+struct ImageAlertView: View {
     @Binding var isPresented: Bool
 
     let title: String?
@@ -17,30 +19,61 @@ struct AlertControllerWithTextFieldContainer: UIViewControllerRepresentable {
     let interstitial: Interstitial
     let measuremetViewController: MeasurementViewController
 
-    func makeUIViewController(context: Context) -> UIViewController {
-        return UIViewController()
+    var body: some View {
+        ZStack {
+            // 背景の暗幕。タップでは閉じない（OK を促す）
+            Color.black.opacity(0.4)
+                .ignoresSafeArea()
+
+            VStack(spacing: 16) {
+                if let title {
+                    Text(title)
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                }
+
+                if let message {
+                    Text(message)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Image("file")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(8)
+
+                Button(action: dismiss) {
+                    Text("OK")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.systemBackground))
+            )
+            // 縦積みなので端末幅に対する割合で幅を決めれば崩れない
+            .frame(maxWidth: 320)
+            .padding(.horizontal, 32)
+        }
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let imageView = UIImageView(frame: CGRect(x: 10, y: 105, width: 250, height: 140))
-        let height = NSLayoutConstraint(item: alert.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 320)
-        alert.view.addConstraint(height)
-        imageView.image = UIImage(named: "file")
-        alert.view.addSubview(imageView)
-        
-        let doneAction = UIAlertAction(title: "OK", style: .default) { _ in
-            measuremetViewController.timeCounter = "0.00"
-            measuremetViewController.graphValues = []
-            interstitial.presentInterstitial()
-        }
-        alert.addAction(doneAction)
-
-        DispatchQueue.main.async {
-            uiViewController.present(alert, animated: true) {
-                isPresented = false
+    private func dismiss() {
+        isPresented = false
+        measuremetViewController.timeCounter = "0.00"
+        measuremetViewController.graphValues = []
+        // 広告がクールダウン中で表示されなかった場合はレビューをリクエストする
+        let skipped = interstitial.presentInterstitial()
+        if skipped {
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
             }
         }
     }
@@ -60,12 +93,12 @@ struct AlertWithImage: ViewModifier {
             content
 
             if isPresented {
-                AlertControllerWithTextFieldContainer(
-                  isPresented: $isPresented,
-                  title: title,
-                  message: message,
-                  interstitial: interstitial, 
-                  measuremetViewController: mesurementViewController
+                ImageAlertView(
+                    isPresented: $isPresented,
+                    title: title,
+                    message: message,
+                    interstitial: interstitial,
+                    measuremetViewController: mesurementViewController
                 )
             }
         }
@@ -77,8 +110,8 @@ extension View {
         self.modifier(AlertWithImage(
              isPresented: isPresented,
              title: title,
-             message: message, 
-             interstitial: interstitial, 
+             message: message,
+             interstitial: interstitial,
              mesurementViewController: measurementViewController
         ))
     }

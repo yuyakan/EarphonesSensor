@@ -21,11 +21,14 @@
 		4B9C62AE2B12181D006D15D1 /* bannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62AD2B12181D006D15D1 /* bannerAd.swift */; };
 		4B9C62B32B124239006D15D1 /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C62B22B124239006D15D1 /* SensorData.swift */; };
 		4B9C62B62B13047C006D15D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B9C62B82B13047C006D15D1 /* Localizable.strings */; };
-		723ED1531609867AB8BC4298 /* Pods_Earphones_Acceleration_Sensor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AD56D22F49B07CC71879FB /* Pods_Earphones_Acceleration_Sensor.framework */; };
+		A1000001000000000000001 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A1000002000000000000001 /* GoogleMobileAds */; };
+		AC00000100000000000000A1 /* AdConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000200000000000000A1 /* AdConsentManager.swift */; };
+		AC00000400000000000000A1 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = AC00000300000000000000A1 /* GoogleUserMessagingPlatform */; };
+		AC10000B00000000000000A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC10000A00000000000000A1 /* InfoPlist.strings */; };
+		AC20000100000000000000A1 /* AdUnitID.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC20000200000000000000A1 /* AdUnitID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		02EACD405D663A74EDFF1945 /* Pods-Earphones Acceleration Sensor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Earphones Acceleration Sensor.debug.xcconfig"; path = "Target Support Files/Pods-Earphones Acceleration Sensor/Pods-Earphones Acceleration Sensor.debug.xcconfig"; sourceTree = "<group>"; };
 		06266779273C22D50072201A /* Earphones Acceleration Sensor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Earphones Acceleration Sensor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0626677C273C22D50072201A /* AirpodsAcceleratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirpodsAcceleratorApp.swift; sourceTree = "<group>"; };
 		0626677E273C22D50072201A /* MesurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesurementView.swift; sourceTree = "<group>"; };
@@ -36,7 +39,6 @@
 		067CB2562741541B00899DD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		06B812CD27410EEA00FD2F79 /* MeasurementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementViewController.swift; sourceTree = "<group>"; };
 		06B812CF27410F0400FD2F79 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		3B89C654F8E04A85B864C5C7 /* Pods-Earphones Acceleration Sensor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Earphones Acceleration Sensor.release.xcconfig"; path = "Target Support Files/Pods-Earphones Acceleration Sensor/Pods-Earphones Acceleration Sensor.release.xcconfig"; sourceTree = "<group>"; };
 		4B0B5FE82B16427100FCE439 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		4B9C62AA2B1217E0006D15D1 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
 		4B9C62AD2B12181D006D15D1 /* bannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bannerAd.swift; sourceTree = "<group>"; };
@@ -50,7 +52,17 @@
 		4B9C62BE2B130486006D15D1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4B9C62BF2B130487006D15D1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4B9C62C02B137E5E006D15D1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		D0AD56D22F49B07CC71879FB /* Pods_Earphones_Acceleration_Sensor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Earphones_Acceleration_Sensor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC00000200000000000000A1 /* AdConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdConsentManager.swift; sourceTree = "<group>"; };
+		AC10000100000000000000A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC10000200000000000000A1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		AC10000300000000000000A1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC10000400000000000000A1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC10000500000000000000A1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC10000600000000000000A1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC10000700000000000000A1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC10000800000000000000A1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AC10000900000000000000A1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		AC20000200000000000000A1 /* AdUnitID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdUnitID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +71,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0655AA622742CCDE001EB8DE /* Charts in Frameworks */,
-				723ED1531609867AB8BC4298 /* Pods_Earphones_Acceleration_Sensor.framework in Frameworks */,
+				A1000001000000000000001 /* GoogleMobileAds in Frameworks */,
+				AC00000400000000000000A1 /* GoogleUserMessagingPlatform in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,8 +84,6 @@
 			children = (
 				0626677B273C22D50072201A /* AirpodsAccelerator */,
 				0626677A273C22D50072201A /* Products */,
-				82871A67CDAF11096725DCF3 /* Pods */,
-				34A363ABF628BF5276BB3F95 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +107,7 @@
 				4B9C62B02B121903006D15D1 /* Setting */,
 				4B93F90E28315BB90076288F /* Ad */,
 				4B9C62B82B13047C006D15D1 /* Localizable.strings */,
+				AC10000A00000000000000A1 /* InfoPlist.strings */,
 				06266780273C22DB0072201A /* Assets.xcassets */,
 				06266782273C22DB0072201A /* Preview Content */,
 			);
@@ -110,19 +122,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		34A363ABF628BF5276BB3F95 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D0AD56D22F49B07CC71879FB /* Pods_Earphones_Acceleration_Sensor.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4B93F90E28315BB90076288F /* Ad */ = {
 			isa = PBXGroup;
 			children = (
 				4B9C62AA2B1217E0006D15D1 /* InterstitialAd.swift */,
 				4B9C62AD2B12181D006D15D1 /* bannerAd.swift */,
+				AC00000200000000000000A1 /* AdConsentManager.swift */,
+				AC20000200000000000000A1 /* AdUnitID.swift */,
 			);
 			path = Ad;
 			sourceTree = "<group>";
@@ -153,15 +159,6 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		82871A67CDAF11096725DCF3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				02EACD405D663A74EDFF1945 /* Pods-Earphones Acceleration Sensor.debug.xcconfig */,
-				3B89C654F8E04A85B864C5C7 /* Pods-Earphones Acceleration Sensor.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,11 +166,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06266787273C22DB0072201A /* Build configuration list for PBXNativeTarget "Earphones Acceleration Sensor" */;
 			buildPhases = (
-				A241AF0A1F3419224B7F3F3D /* [CP] Check Pods Manifest.lock */,
 				06266775273C22D50072201A /* Sources */,
 				06266776273C22D50072201A /* Frameworks */,
 				06266777273C22D50072201A /* Resources */,
-				9DD4E49DEB20D116AD77539A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,6 +177,8 @@
 			name = "Earphones Acceleration Sensor";
 			packageProductDependencies = (
 				0655AA612742CCDE001EB8DE /* Charts */,
+				A1000002000000000000001 /* GoogleMobileAds */,
+				AC00000300000000000000A1 /* GoogleUserMessagingPlatform */,
 			);
 			productName = AirpodsAccelerator;
 			productReference = 06266779273C22D50072201A /* Earphones Acceleration Sensor.app */;
@@ -221,6 +218,8 @@
 			mainGroup = 06266770273C22D50072201A;
 			packageReferences = (
 				0655AA602742CCDE001EB8DE /* XCRemoteSwiftPackageReference "swiftui-charts" */,
+				A1000003000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				AC00000500000000000000A1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */,
 			);
 			productRefGroup = 0626677A273C22D50072201A /* Products */;
 			projectDirPath = "";
@@ -238,53 +237,12 @@
 			files = (
 				06266784273C22DB0072201A /* Preview Assets.xcassets in Resources */,
 				4B9C62B62B13047C006D15D1 /* Localizable.strings in Resources */,
+				AC10000B00000000000000A1 /* InfoPlist.strings in Resources */,
 				06266781273C22DB0072201A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		9DD4E49DEB20D116AD77539A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Earphones Acceleration Sensor/Pods-Earphones Acceleration Sensor-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Earphones Acceleration Sensor/Pods-Earphones Acceleration Sensor-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Earphones Acceleration Sensor/Pods-Earphones Acceleration Sensor-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A241AF0A1F3419224B7F3F3D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Earphones Acceleration Sensor-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		06266775273C22D50072201A /* Sources */ = {
@@ -292,6 +250,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B9C62AB2B1217E0006D15D1 /* InterstitialAd.swift in Sources */,
+				AC00000100000000000000A1 /* AdConsentManager.swift in Sources */,
+				AC20000100000000000000A1 /* AdUnitID.swift in Sources */,
 				06602B6027441E9A009FFACD /* DeviceTraitStatus.swift in Sources */,
 				067CB253274120C500899DD3 /* SettingInfo.swift in Sources */,
 				4B0B5FE92B16427100FCE439 /* AlertViewController.swift in Sources */,
@@ -321,6 +281,22 @@
 				4B9C62C02B137E5E006D15D1 /* pt-BR */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		AC10000A00000000000000A1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC10000100000000000000A1 /* en */,
+				AC10000200000000000000A1 /* zh-Hans */,
+				AC10000300000000000000A1 /* fr */,
+				AC10000400000000000000A1 /* de */,
+				AC10000500000000000000A1 /* ja */,
+				AC10000600000000000000A1 /* ko */,
+				AC10000700000000000000A1 /* ru */,
+				AC10000800000000000000A1 /* es */,
+				AC10000900000000000000A1 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -446,7 +422,6 @@
 		};
 		06266788273C22DB0072201A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02EACD405D663A74EDFF1945 /* Pods-Earphones Acceleration Sensor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -472,7 +447,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanbe.AirpodsAccelerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -483,7 +458,6 @@
 		};
 		06266789273C22DB0072201A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B89C654F8E04A85B864C5C7 /* Pods-Earphones Acceleration Sensor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -509,7 +483,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanbe.AirpodsAccelerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -550,6 +524,22 @@
 				kind = branch;
 			};
 		};
+		A1000003000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
+		AC00000500000000000000A1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -557,6 +547,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0655AA602742CCDE001EB8DE /* XCRemoteSwiftPackageReference "swiftui-charts" */;
 			productName = Charts;
+		};
+		A1000002000000000000001 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1000003000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		AC00000300000000000000A1 /* GoogleUserMessagingPlatform */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC00000500000000000000A1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
+			productName = GoogleUserMessagingPlatform;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

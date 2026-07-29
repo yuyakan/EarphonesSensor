@@ -13,8 +13,11 @@ import GoogleMobileAds
 // AppDelegateクラスを定義する
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // Mobile Ads SDKを初期化する
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        // 同意フロー（UMP）とATTのリクエストを行ってから広告SDKを初期化する
+        AdConsentManager.shared.gatherConsent {
+            // Mobile Ads SDKを初期化する
+            MobileAds.shared.start(completionHandler: nil)
+        }
         return true
     }
 }

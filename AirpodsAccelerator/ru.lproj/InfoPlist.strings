@@ -1,0 +1,5 @@
+/*
+  InfoPlist.strings
+  Earphones Acceleration Sensor
+*/
+"NSUserTrackingUsageDescription" = "Ваши данные будут использоваться для показа более релевантной рекламы.";
