@@ -70,6 +70,9 @@ struct MeasurementView: View {
         .onAppear() {
             interstitial.loadInterstitial()
         }
+        // 画像付き保存完了ダイアログは画面全体を覆うため、個々のボタンではなく
+        // 画面ルートに付ける（狭いボタンのフレームに閉じ込められるのを防ぐ）
+        .alertWithImage(isPresented: $measuremetViewController.saveCompleteShowingAlert, title: String(localized: "Save completed"), message: String(localized: "saveFile"), interstitial: interstitial, measurementViewController: measuremetViewController)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
@@ -132,7 +135,6 @@ private extension MeasurementView {
                     }
                     .disabled(!measuremetViewController.isStartingMeasure)
                     .opacity(measuremetViewController.isStartingMeasure ? 1 : 0.3)
-                    .alertWithImage(isPresented: $measuremetViewController.saveCompleteShowingAlert, title: String(localized: "Save completed"), message: String(localized: "saveFile"), interstitial: interstitial, measurementViewController: measuremetViewController)
                 }
                 Spacer()
             }.padding()
