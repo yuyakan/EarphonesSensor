@@ -195,7 +195,10 @@ private extension MeasurementView {
                         Thread.sleep(forTimeInterval: 0.5)
                         measuremetViewController.timeCounter = "0.00"
                         measuremetViewController.graphValues = []
-                        interstitial.presentInterstitial()
+                        // 広告がクールダウン中で表示されなかった場合はレビューをリクエストする
+                        if interstitial.presentInterstitial() {
+                            requestReview()
+                        }
                     }
                 } message: {
                     Text(LocalizedStringKey("saveFile"))

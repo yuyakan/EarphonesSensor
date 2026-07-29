@@ -1,0 +1,5 @@
+/*
+  InfoPlist.strings
+  Earphones Acceleration Sensor
+*/
+"NSUserTrackingUsageDescription" = "더 관련성 높은 광고를 표시하기 위해 데이터가 사용됩니다.";

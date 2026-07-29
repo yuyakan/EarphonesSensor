@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import StoreKit
 
 struct AlertControllerWithTextFieldContainer: UIViewControllerRepresentable {
 
@@ -34,7 +35,13 @@ struct AlertControllerWithTextFieldContainer: UIViewControllerRepresentable {
         let doneAction = UIAlertAction(title: "OK", style: .default) { _ in
             measuremetViewController.timeCounter = "0.00"
             measuremetViewController.graphValues = []
-            interstitial.presentInterstitial()
+            // 広告がクールダウン中で表示されなかった場合はレビューをリクエストする
+            let skipped = interstitial.presentInterstitial()
+            if skipped {
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+            }
         }
         alert.addAction(doneAction)
 
